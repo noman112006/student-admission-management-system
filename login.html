@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Login - Student Admission Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf2fb, #d6e5f5);
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0b3c7c, #1559a6);
+            color: white;
+            text-align: center;
+            padding: 32px;
+            font-size: 26px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 82vh;
+            padding: 30px;
+        }
+
+        .login-box {
+            width: 420px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #0b3c7c;
+            margin: 0 0 30px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Red Star */
+
+        .required {
+            color: red;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccd4df;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #0b3c7c;
+            box-shadow: 0 0 0 3px rgba(11, 60, 124, 0.1);
+        }
+
+        /* Empty field */
+
+        input.error {
+            border: 2px solid #d62828;
+            box-shadow: none;
+        }
+
+        /* Required Error */
+
+        .field-error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .forgot {
+            text-align: right;
+            margin-top: 8px;
+        }
+
+        .forgot a {
+            color: #0b3c7c;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .forgot a:hover {
+            text-decoration: underline;
+        }
+
+        #message {
+            color: #d62828;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #0b3c7c, #1559a6);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #062d5f, #0b3c7c);
+        }
+
+        .signup {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup a {
+            color: #0b3c7c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="header">
+
+        Student Admission Management System
+
+    </div>
+
+
+    <div class="main">
+
+        <div class="login-box">
+
+            <h1>Admin Login</h1>
+
+
+            <form id="loginForm">
+
+
+                <!-- Username -->
+
+                <label>
+
+                    Username
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    name="uname"
+                    id="uname"
+                    placeholder="Enter Username"
+                >
+
+
+                <div
+                    class="field-error"
+                    id="usernameError"
+                >
+
+                    Username is required.
+
+                </div>
+
+
+                <!-- Password -->
+
+                <label>
+
+                    Password
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter Password"
+                >
+
+
+                <div
+                    class="field-error"
+                    id="passwordError"
+                >
+
+                    Password is required.
+
+                </div>
+
+
+                <!-- Forgot Password -->
+
+                <div class="forgot">
+
+                    <a href="forgot_password.php">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+
+                <!-- Login Message -->
+
+                <div id="message"></div>
+
+
+                <!-- Login Button -->
+
+                <button type="submit">
+
+                    Login
+
+                </button>
+
+
+            </form>
+
+
+            <div class="signup">
+
+                Don't have an account?
+
+                <a href="signup.html">
+
+                    Sign Up
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        let form =
+            document.getElementById("loginForm");
+
+
+        let username =
+            document.getElementById("uname");
+
+
+        let password =
+            document.getElementById("password");
+
+
+        let message =
+            document.getElementById("message");
+
+
+        let usernameError =
+            document.getElementById("usernameError");
+
+
+        let passwordError =
+            document.getElementById("passwordError");
+
+
+        /* Username typing */
+
+        username.addEventListener("input", function() {
+
+            if (username.value.trim() != "") {
+
+                username.classList.remove("error");
+
+                usernameError.style.display = "none";
+
+            }
+
+        });
+
+
+        /* Password typing */
+
+        password.addEventListener("input", function() {
+
+            if (password.value.trim() != "") {
+
+                password.classList.remove("error");
+
+                passwordError.style.display = "none";
+
+            }
+
+        });
+
+
+        /* Login */
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            let valid = true;
+
+
+            message.innerHTML = "";
+
+
+            /* Username Check */
+
+            if (username.value.trim() == "") {
+
+                username.classList.add("error");
+
+                usernameError.style.display = "block";
+
+                valid = false;
+
+            }
+
+
+            /* Password Check */
+
+            if (password.value.trim() == "") {
+
+                password.classList.add("error");
+
+                passwordError.style.display = "block";
+
+                valid = false;
+
+            }
+
+
+            /* Stop if empty */
+
+            if (!valid) {
+
+                return;
+
+            }
+
+
+            /* Send data to PHP */
+
+            let formData =
+                new FormData(form);
+
+
+            fetch("login.php", {
+
+                method: "POST",
+
+                body: formData
+
+            })
+
+
+            .then(response => response.text())
+
+
+            .then(data => {
+
+                if (data.trim() == "success") {
+
+                    window.location.href =
+                        "dashboard.php";
+
+                }
+
+                else {
+
+                    message.innerHTML = data;
+
+                }
+
+            })
+
+
+            .catch(error => {
+
+                message.innerHTML =
+                    "Something went wrong. Please try again.";
+
+            });
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

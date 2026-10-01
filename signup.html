@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Signup</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eaf2fb, #d6e5f5);
+            min-height: 100vh;
+        }
+
+        .top-header {
+            height: 75px;
+            background: linear-gradient(90deg, #0b3c7c, #1559a6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .signup-container {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .signup-box {
+            width: 362px;
+            background: white;
+            padding: 30px 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0b3c7c;
+            margin: 0 0 25px 0;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: red;
+        }
+
+        input {
+            width: 100%;
+            height: 38px;
+            padding: 8px 11px;
+            border: 1px solid #c5cdd6;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #1559a6;
+        }
+
+        input.invalid {
+            border: 2px solid red;
+            background-color: #fff5f5;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            min-height: 15px;
+        }
+
+        button {
+            width: 100%;
+            height: 38px;
+            margin-top: 12px;
+            background: #0b3c7c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1559a6;
+        }
+
+        .success {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #0b3c7c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="top-header">
+
+    <h1>Student Admission Management System</h1>
+
+</div>
+
+
+<div class="signup-container">
+
+    <div class="signup-box">
+
+        <h2>Admin Signup</h2>
+
+
+        <form id="signupForm" novalidate>
+
+
+            <!-- ADMIN NAME -->
+
+            <label>
+                Admin Name <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                name="admin_name"
+                id="admin_name"
+                placeholder="Enter Admin Name"
+            >
+
+            <div id="adminNameError" class="error"></div>
+
+
+            <!-- USERNAME -->
+
+            <label>
+                Username <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                name="uname"
+                id="uname"
+                placeholder="Enter Username"
+            >
+
+            <div id="unameError" class="error"></div>
+
+
+            <!-- PASSWORD -->
+
+            <label>
+                Password <span class="required">*</span>
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter 6 Character Password"
+                maxlength="6"
+            >
+
+            <div id="passwordError" class="error"></div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <label>
+                Confirm Password <span class="required">*</span>
+            </label>
+
+            <input
+                type="password"
+                name="confirm_password"
+                id="confirm_password"
+                placeholder="Confirm Password"
+                maxlength="6"
+            >
+
+            <div id="confirmError" class="error"></div>
+
+
+            <!-- SIGN UP -->
+
+            <button type="submit">
+                Sign Up
+            </button>
+
+
+            <div id="successMessage" class="success"></div>
+
+
+        </form>
+
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.getElementById("signupForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    let adminName =
+        document.getElementById("admin_name");
+
+    let uname =
+        document.getElementById("uname");
+
+    let password =
+        document.getElementById("password");
+
+    let confirmPassword =
+        document.getElementById("confirm_password");
+
+
+    let adminNameError =
+        document.getElementById("adminNameError");
+
+    let unameError =
+        document.getElementById("unameError");
+
+    let passwordError =
+        document.getElementById("passwordError");
+
+    let confirmError =
+        document.getElementById("confirmError");
+
+    let successMessage =
+        document.getElementById("successMessage");
+
+
+    /* CLEAR */
+
+    adminNameError.innerHTML = "";
+    unameError.innerHTML = "";
+    passwordError.innerHTML = "";
+    confirmError.innerHTML = "";
+    successMessage.innerHTML = "";
+
+    adminName.classList.remove("invalid");
+    uname.classList.remove("invalid");
+    password.classList.remove("invalid");
+    confirmPassword.classList.remove("invalid");
+
+
+    let valid = true;
+
+
+    /* ADMIN NAME */
+
+    if (adminName.value.trim() === "") {
+
+        adminName.classList.add("invalid");
+
+        adminNameError.innerHTML =
+            "Admin Name is required.";
+
+        valid = false;
+    }
+
+
+    /* USERNAME */
+
+    if (uname.value.trim() === "") {
+
+        uname.classList.add("invalid");
+
+        unameError.innerHTML =
+            "Username is required.";
+
+        valid = false;
+    }
+
+
+    /* PASSWORD */
+
+    if (password.value.trim() === "") {
+
+        password.classList.add("invalid");
+
+        passwordError.innerHTML =
+            "Password is required.";
+
+        valid = false;
+
+    }
+
+    else if (password.value.length !== 6) {
+
+        password.classList.add("invalid");
+
+        passwordError.innerHTML =
+            "Password must be exactly 6 characters.";
+
+        valid = false;
+    }
+
+
+    /* CONFIRM PASSWORD */
+
+    if (confirmPassword.value.trim() === "") {
+
+        confirmPassword.classList.add("invalid");
+
+        confirmError.innerHTML =
+            "Confirm Password is required.";
+
+        valid = false;
+
+    }
+
+    else if (password.value !== confirmPassword.value) {
+
+        confirmPassword.classList.add("invalid");
+
+        confirmError.innerHTML =
+            "Passwords do not match.";
+
+        valid = false;
+    }
+
+
+    /* STOP */
+
+    if (!valid) {
+        return;
+    }
+
+
+    /* SEND TO PHP */
+
+    let formData = new FormData(this);
+
+
+    fetch("signup.php", {
+
+        method: "POST",
+
+        body: formData
+
+    })
+
+
+    .then(response => response.text())
+
+
+    .then(data => {
+
+        data = data.trim();
+
+
+        /* USERNAME EXISTS */
+
+        if (data === "uname_exists") {
+
+            uname.classList.add("invalid");
+
+            unameError.innerHTML =
+                "Username already exists.";
+
+            return;
+        }
+
+
+        /* SUCCESS */
+
+        if (data === "success") {
+
+            successMessage.style.color = "green";
+
+            successMessage.innerHTML =
+                "Registration successful!";
+
+            document.getElementById("signupForm").reset();
+
+
+            setTimeout(function() {
+
+                window.location.href = "login.html";
+
+            }, 1500);
+
+            return;
+        }
+
+
+        /* OTHER ERROR */
+
+        successMessage.style.color = "red";
+
+        successMessage.innerHTML = data;
+
+    })
+
+
+    .catch(error => {
+
+        successMessage.style.color = "red";
+
+        successMessage.innerHTML =
+            "Something went wrong. Please try again.";
+
+    });
+
+});
+
+
+/* REMOVE ERROR WHEN TYPING */
+
+document.getElementById("admin_name").addEventListener("input", function() {
+
+    this.classList.remove("invalid");
+
+    document.getElementById("adminNameError").innerHTML = "";
+
+});
+
+
+document.getElementById("uname").addEventListener("input", function() {
+
+    this.classList.remove("invalid");
+
+    document.getElementById("unameError").innerHTML = "";
+
+});
+
+
+document.getElementById("password").addEventListener("input", function() {
+
+    this.classList.remove("invalid");
+
+    document.getElementById("passwordError").innerHTML = "";
+
+});
+
+
+document.getElementById("confirm_password").addEventListener("input", function() {
+
+    this.classList.remove("invalid");
+
+    document.getElementById("confirmError").innerHTML = "";
+
+});
+
+</script>
+
+
+</body>
+
+</html>
